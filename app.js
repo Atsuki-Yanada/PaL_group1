@@ -46,8 +46,6 @@ $('#task1-submit-btn').addEventListener('click', () => {
     const price1 = task1Form.elements['price1'].value;
     const season2 = task1Form.elements['season2'].value;
     const price2 = task1Form.elements['price2'].value;
-    
-    const strs = []
 
     $('#task1-result').innerHTML = getSentences(subject, season1, price1, season2, price2);
 });
