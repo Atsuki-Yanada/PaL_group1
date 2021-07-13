@@ -3,9 +3,9 @@ const getSentence = (subject, season1, price1str, season2, price2str) => {
     const price1 = Number(price1str.substr(0, price1str.indexOf(' yen')));
     const price2 = Number(price2str.substr(0, price2str.indexOf(' yen')));
 
-    //Whether it is an adverb
     let adverb
-    if (Math.abs(price1 - price2) < 10) {
+    // If it is less than 10% of the input value, it is 'slightly', if it is different, 'substantially'
+    if (Math.abs(price1 - price2) < price1 / 10) {
         adverb = 'slightly'
     } else {
         adverb = 'substantially'
