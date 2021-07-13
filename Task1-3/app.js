@@ -3,13 +3,21 @@ const getSentence = (subject, season1, price1str, season2, price2str) => {
     const price1 = Number(price1str.substr(0, price1str.indexOf(' yen')));
     const price2 = Number(price2str.substr(0, price2str.indexOf(' yen')));
 
+    //Whether it is an adverb
+    let adverb
+    if (Math.abs(price1 - price2) < 10) {
+        adverb = 'slightly'
+    } else {
+        adverb = 'substantially'
+    }
+
     let sentence;
     if (price1 - price2 < 0) {
-        sentence = subject + ' increased by ' + Math.abs(price1 - price2) + ' yen' + ' from ' +
-        price1str + ' in ' + season1 + ' to ' + price2str + ' in ' + season2 + '.';
+        sentence = subject + ' increased ' + adverb + ' by ' + Math.abs(price1 - price2) + ' yen' + ' from ' +
+            price1str + ' in ' + season1 + ' to ' + price2str + ' in ' + season2 + '.';
     } else if (price1 - price2 > 0) {
-        sentence = subject + ' decreased by ' + Math.abs(price1 - price2) + ' yen' + ' from ' +
-        price1str + ' in ' + season1 + ' to ' + price2str + ' in ' + season2 + '.';
+        sentence = subject + ' decreased ' + adverb + ' by ' + Math.abs(price1 - price2) + ' yen' + ' from ' +
+            price1str + ' in ' + season1 + ' to ' + price2str + ' in ' + season2 + '.';
     } else {
         sentence = subject + ' remained stable at ' + price1str + '.';
     }
@@ -20,7 +28,7 @@ const getSentence = (subject, season1, price1str, season2, price2str) => {
 
 // Generate a sentence from the given "value1-5".
 const getSentences = (subject, season1, price1, season2, price2) => {
-    if(getInputError(subject, season1, price1, season2, price2)){
+    if (getInputError(subject, season1, price1, season2, price2)) {
         return 'Please enter all of the items.';
     }
 
@@ -46,7 +54,7 @@ $('#task1-submit-btn').addEventListener('click', () => {
     const price1 = task1Form.elements['price1'].value;
     const season2 = task1Form.elements['season2'].value;
     const price2 = task1Form.elements['price2'].value;
-    
+
     const strs = []
 
     $('#task1-result').innerHTML = getSentences(subject, season1, price1, season2, price2);
