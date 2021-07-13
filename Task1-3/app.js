@@ -54,8 +54,11 @@ $('#task1-submit-btn').addEventListener('click', () => {
     const price1 = task1Form.elements['price1'].value;
     const season2 = task1Form.elements['season2'].value;
     const price2 = task1Form.elements['price2'].value;
+<<<<<<< HEAD:Task1-3/app.js
 
     const strs = []
+=======
+>>>>>>> 6e222e7a76069acf4c8902d56688bc85c29dd7b1:app.js
 
     $('#task1-result').innerHTML = getSentences(subject, season1, price1, season2, price2);
 });
