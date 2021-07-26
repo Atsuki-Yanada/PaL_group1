@@ -1,31 +1,85 @@
+// Generate paragraph from the given input.
+const getParagraph = () => {
+    return firstSentence() + secondSentence() + thirdSentece() + FourthSentence();
+}
 
+// Generate summary sentence
+const firstSentence = () => {
+    const ot = getOverallTrend();
+    return `Overall, ${subject} ${ot.verb} during the six-mounth period. <br>`;
+}
 
-// Generate a sentence from the given input.
-const getSentences = (subject, period, value) => {
-    console.log(subject)
-    for(let i=0; i < task1Form.period.length; ++i){
-        console.log(period[i] + ': ' + value[i])
+// Generate average and median sentence
+const secondSentence = () => {
+    const aam = getAverageAndMedian();
+    return `The average price is ${aam.average} yen and the median is ${aam.median} yen. <br>`;
+}
+
+// Generate sentences using adverbs and change verbs
+const thirdSentece = () => {
+    const ot = getOverallTrend();
+    let sentence = ``
+
+    const verb = [
+        ['rose', 'fell', 'remain steady'],
+        ['climbed', 'dropped', 'does not change'],
+        ['increased', 'decreased', 'remain stable']
+    ]
+
+    const getVerb = (i) => {
+        let p1 = ot.period1[i];
+        let p2 = ot.period2[i];
+        let res = `${ot.adverb[p1][p2-p1-1]} `
+        if (ot.percentage[p1][p2-p1-1] > 0) {
+            res += `${verb[i%3][0]} ${ot.percentage[p1][p2-p1-1]}% `;
+        } else if (ot.percentage[p1][p2-p1-1] < 0) {
+            res += `${verb[i%3][1]} ${Math.abs(ot.percentage[p1][p2-p1-1])}% `;
+        } else {
+            res += `${verb[i%3][2]} `;
+        }
+        return res;
     }
+
+    for (let i = 0; i < ot.period1.length; ++i) {
+        let index = i % 3;
+        if (index === 0) {
+            sentence += `The price ${getVerb(i)} from ${period[ot.period1[i]]} to ${period[ot.period2[i]]}. <br>`
+        } else if (index === 1) {
+            sentence += `From ${period[ot.period1[i]]} to ${period[ot.period2[i]]}, its price ${getVerb(i)}. <br>`
+        } else {
+            sentence += `It ${getVerb(i)} between ${period[ot.period1[i]]} to ${period[ot.period2[i]]}. <br>`
+        }
+    }
+    return sentence;
+}
+
+const FourthSentence = () => {
+    sentence = ``;
+    const maxP = getMaxPeakPeriod()[0];
+    const minP = getMinPeakPeriod()[0];
+    return `The price peaked at ${value[maxP]} yen in ${period[maxP]}, it bottomed out at ${value[minP]} in ${period[minP]}. <br>`
 }
 
 // Listen if a button on the page is pressed and embeds the sentences from the given input into the HTML.
-$('#task1-submit-btn').addEventListener('click', () => {
-    const task1Form = document.forms['task1Form'];
-    const subject = task1Form.subject.value;
-    const period = []
-    const value = []
-
-    for(let i=0; i < task1Form.period.length; ++i){
-        period.push(task1Form.period[i].value)
-        value.push(task1Form.value[i].value)
+$('#submit-btn').addEventListener('click', () => {
+    const form = document.forms['Form'];
+    subject = form.subject.value;
+    period = [];
+    value = [];
+    let valueStr, num
+    for (let i = 0; i < form.period.length; ++i) {
+        period.push(form.period[i].value);
+        valueStr = form.value[i].value
+        num = Number(valueStr.substr(0, valueStr.indexOf(' yen')));
+        value.push(num);
     }
-    
-    $('#task1-result').innerHTML = getSentences(subject, period, value);
+    $('#result').innerHTML = getParagraph();
+    /*
+    console.log('◆◆◆◆◆◆◆◆◆◆◆FUNCTION TEST◆◆◆◆◆◆◆◆◆◆◆◆')
+    getOverallTrend();
+    getMostChangedPeriod();
+    getMaxPeakPeriod();
+    getMinPeakPeriod();
+    getAverageAndMedian();
+    */
 });
-
-///////////////
-// 文章の流れ //
-///////////////
-/*
-    
-*/
