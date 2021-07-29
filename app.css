@@ -1,0 +1,148 @@
+body{
+font-family: "Helvetica Neue";
+font-size: 20px;
+    margin: 80px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+h1{
+    font-size: 40px;
+    font-weight: normal;
+    color:#000000;
+    margin-bottom: -2px;
+}
+
+.perfect-circle {
+    float: left;
+    margin-right: 10px;
+    margin-top:6px;
+    margin-left: 2px;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background: #ff2c2c;
+}
+
+h2{
+
+    font-size: 22px;
+    color: #000000;
+    font-weight: normal;
+    margin-top: -1px;
+}
+
+
+
+button {
+
+    background-color: #ffffff;
+    padding: 1em 2em;
+    width: 250px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Helvetica Neue";
+    font-weight: normal;
+    border: 2px solid #000000;
+    margin-top: 30px;
+    margin-bottom: 0px;
+
+}
+
+button::after {
+
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #000000;
+    border-right: 3px solid #000000;
+    transform: rotate(45deg);
+}
+
+button:hover  {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #000000;
+
+}
+
+button:hover::after  {
+    border-top: 3px solid #333333;
+    border-right: 3px solid #333333;
+}
+
+
+
+input{
+    font: 20px/24px "Helvetica Neue";
+    box-sizing: border-box;
+    width: 11%;
+    padding: 0.3em;
+    transition: 0.3s;
+    letter-spacing: 1px;
+    color: #aaaaaa;
+    border: none;
+
+    background: transparent;
+
+    margin-left: 20px;
+    margin-right: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    
+}
+
+input[type='text']:focus {
+    border-bottom: 1px solid #000000;
+    outline: none;
+}
+
+input.subject{
+    font: 20px/24px "Helvetica Neue";
+    box-sizing: border-box;
+    width: 28%;
+    padding: 0.3em;
+    transition: 0.3s;
+    letter-spacing: 1px;
+    color: #aaaaaa;
+    border: none;
+
+    background: transparent;
+
+
+}
+
+
+
+
+p.result {
+    font-size: 22px;
+    position: absolute;
+    top: 230px;
+    left: 690px;
+    width: 660px;
+    height: 200px;
+    text-align:justify;
+
+
+}
+
+
+
+p.result::first-letter{
+    font-size: 80px;
+    margin-right: 10px;
+    line-height:10px;
+
+
+}
+
+p.name {
+    font-size: 17px;
+    position: absolute;
+    top: 665px;
+    left: 1050px;
+    color: #aaaaaa;
+
+}
